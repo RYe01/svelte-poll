@@ -1,5 +1,5 @@
 <footer>
-    <div class="copyright">Copyright 2021</div>
+    <div class="copyright">Copyright 2021 - Andrew Rozs</div>
 </footer>
 
 <style>
