@@ -5,6 +5,8 @@
     const dispatch = createEventDispatcher();
 
     $: totalVotes = poll.votesA + poll.votesB;
+    $: percentA = Math.floor(100 / totalVotes * poll.votesA);
+    $: percentB = Math.floor(100 / totalVotes * poll.votesB);
 
     const handleVote = (option, id) => {
         dispatch('vote', {option, id})
@@ -16,11 +18,11 @@
         <h3>{ poll.question }</h3>
         <p>Total votes: { totalVotes }</p>
         <div class="answer" on:click={() => handleVote('a', poll.id)}>
-            <div class="percent percent-a"></div>
+            <div class="percent percent-a" style="width: {percentA}%"></div>
             <span>{ poll.answerA } ({ poll.votesA })</span>
         </div>
         <div class="answer" on:click={() => handleVote('b', poll.id)}>
-            <div class="percent percent-b"></div>
+            <div class="percent percent-b" style="width: {percentB}%"></div>
             <span>{ poll.answerB } ({ poll.votesB })</span>
         </div>
     </div>
@@ -49,5 +51,18 @@
     span {
         display: inline-block;
         padding: 10px 20px;
+    }
+    .percent {
+        height: 100%;
+        position: absolute;
+        box-sizing: border-box;
+    }
+    .percent-a {
+        border-left: 4px solid rgb(0, 0, 255);
+        background: rgba(0, 0, 255, 0.2);
+    }
+    .percent-b {
+        border-left: 4px solid rgb(255, 166, 0);
+        background: rgba(255, 166, 0, 0.2);
     }
 </style>
